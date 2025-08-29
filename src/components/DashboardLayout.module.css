@@ -1,0 +1,185 @@
+.dashboardWrapper {
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* Header Navigation Bar */
+.header {
+  background: linear-gradient(90deg, #2D7A32 0%, #1B5E20 100%);
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Logo */
+.logo {
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Arial', sans-serif;
+  color: #2D7A32;
+}
+
+/* Navigation Tabs */
+.navTab {
+  padding: 0 20px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.navTab:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.navTabActive {
+  color: white !important;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.navTabActive::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: white;
+}
+
+/* Resources Dropdown */
+.resourcesDropdown {
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.resourcesDropdown:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* User Profile */
+.userProfile {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.2s ease;
+}
+
+.userProfile:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Main Content Area */
+.main {
+  background: #f8f9fa;
+  min-height: calc(100vh - 60px);
+  padding: 0;
+}
+
+/* Page Header Section */
+.pageHeader {
+  background: white;
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Controls Bar */
+.controlsBar {
+  background: white;
+  padding: 16px 0;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+}
+
+/* Search Input */
+.searchInput {
+  flex: 1;
+  max-width: 600px;
+}
+
+.searchInput input {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.searchInput input:focus {
+  border-color: #2D7A32;
+  outline: none;
+}
+
+/* Add Patient Button */
+.addPatientButton {
+  background: #2D7A32;
+  color: white;
+  border: none;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.addPatientButton:hover {
+  background: #245a28;
+}
+
+/* Content Area */
+.contentArea {
+  padding: 0 24px 40px 24px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .navTab {
+    padding: 0 15px;
+    font-size: 13px;
+  }
+
+  .searchInput {
+    width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 10px;
+  }
+
+  .navTab {
+    display: none;
+  }
+
+  .pageHeader {
+    padding: 15px 0;
+  }
+
+  .controlsBar {
+    padding: 12px 0;
+  }
+
+  .searchInput {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .addPatientButton {
+    padding: 6px 16px;
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,75 @@
+.card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: none;
+  position: relative;
+  overflow: visible !important;
+  z-index: 1;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.patientName {
+  color: #2D7A32;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.actionLink {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actionLink:hover {
+  text-decoration: underline;
+  color: #2D7A32 !important;
+}
+
+.assessmentButton {
+  color: #666;
+  padding: 4px 8px;
+  font-size: 0.875rem;
+}
+
+.assessmentButton:hover {
+  background: #f5f5f5;
+}
+
+.tag {
+  border: 1px solid;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  font-weight: 500;
+}
+
+.assessmentModal {
+  .mantine-Modal-title {
+    color: #2D7A32;
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+}
+
+/* Status metrics styling */
+.metricsGroup {
+  background: #f9f9f9;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .card {
+    padding: 12px;
+    width: 100%;
+  }
+  
+  .patientName {
+    font-size: 1rem;
+  }
+}

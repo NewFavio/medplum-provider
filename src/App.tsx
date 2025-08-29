@@ -4,14 +4,15 @@ import { ProfileResource, getReferenceString } from '@medplum/core';
 import {
   AppShell,
   Loading,
-  Logo,
   NotificationIcon,
   useMedplum,
   useMedplumNavigate,
   useMedplumProfile,
 } from '@medplum/react';
+import { RAYLogo } from './components/RAYLogo';
 import {
   IconClipboardCheck,
+  IconClipboardText,
   IconMail,
   IconPencil,
   IconPill,
@@ -36,6 +37,7 @@ import { DoseSpotTab } from './pages/patient/DoseSpotTab';
 import { EditTab } from './pages/patient/EditTab';
 import { ExportTab } from './pages/patient/ExportTab';
 import { IntakeFormPage } from './pages/patient/IntakeFormPage';
+import { BaselineIntakeFormPage } from './pages/patient/BaselineIntakeFormPage';
 import { PatientPage } from './pages/patient/PatientPage';
 import { PatientSearchPage } from './pages/patient/PatientSearchPage';
 import { TimelineTab } from './pages/patient/TimelineTab';
@@ -49,6 +51,8 @@ import { TaskDetails } from './pages/tasks/TaskDetails';
 import { MessagesPage } from './pages/messages/MessagesPage';
 import { TasksPage } from './pages/tasks/TasksPage';
 import { TaskSelectEmpty } from './components/tasks/TaskSelectEmpty';
+import { PatientDashboardV2 } from './pages/PatientDashboardV2';
+import { PatientDetailView } from './pages/PatientDetailView';
 
 export function App(): JSX.Element | null {
   const medplum = useMedplum();
@@ -64,7 +68,7 @@ export function App(): JSX.Element | null {
 
   return (
     <AppShell
-      logo={<Logo size={24} />}
+      logo={<RAYLogo size={34} />}
       menus={[
         {
           title: 'Charts',
@@ -72,8 +76,15 @@ export function App(): JSX.Element | null {
             {
               icon: <IconUser />,
               label: 'Patients',
-              href: '/Patient?_count=20&_fields=name,email,gender&_sort=-_lastUpdated',
+              href: '/dashboard',
             },
+          ],
+        },
+        {
+          title: 'Onboarding',
+          links: [
+            { icon: <IconPencil />, label: 'Eligibility', href: '/onboarding' },
+            { icon: <IconClipboardText />, label: 'Intake Form', href: '/baseline-intake' }
           ],
         },
         {
@@ -87,10 +98,6 @@ export function App(): JSX.Element | null {
         {
           title: 'Tasks',
           links: [{ icon: <IconClipboardCheck />, label: 'Tasks', href: '/Task' }],
-        },
-        {
-          title: 'Onboarding',
-          links: [{ icon: <IconPencil />, label: 'New Patient', href: '/onboarding' }],
         },
         {
           title: 'Integrations',
@@ -127,9 +134,11 @@ export function App(): JSX.Element | null {
             <>
               <Route
                 path="/"
-                element={<Navigate to="/Patient?_count=20&_fields=name,email,gender&_sort=-_lastUpdated" replace />}
+                element={<Navigate to="/dashboard" replace />}
               />
+              <Route path="/dashboard" element={<PatientDashboardV2 />} />
               <Route path="/Patient/new" element={<ResourceCreatePage />} />
+              <Route path="/Patient/mock/:patientId" element={<PatientDetailView />} />
               <Route path="/Patient/:patientId" element={<PatientPage />}>
                 <Route path="Encounter/new" element={<EncounterModal />} />
                 <Route path="Encounter/:encounterId" element={<EncounterChart />}>
@@ -159,6 +168,7 @@ export function App(): JSX.Element | null {
                 <Route path=":taskId" element={<TaskDetails />} />
               </Route>
               <Route path="/onboarding" element={<IntakeFormPage />} />
+              <Route path="/baseline-intake" element={<BaselineIntakeFormPage />} />
               <Route path="/schedule" element={<SchedulePage />} />
               <Route path="/signin" element={<SignInPage />} />
               <Route path="/dosespot" element={<DoseSpotTab />} />

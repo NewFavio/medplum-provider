@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
 // SPDX-License-Identifier: Apache-2.0
-import { Paper } from '@mantine/core';
+import { Paper, Button, Group } from '@mantine/core';
 import {
   DEFAULT_SEARCH_COUNT,
   Filter,
@@ -16,6 +16,7 @@ import { JSX, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useResourceType } from './resource/useResourceType';
 import classes from './SearchPage.module.css';
+import { CustomPatientList } from '../components/CustomPatientList';
 
 export function SearchPage(): JSX.Element {
   const medplum = useMedplum();
@@ -43,6 +44,21 @@ export function SearchPage(): JSX.Element {
 
   if (!search?.resourceType || !search.fields || search.fields.length === 0) {
     return <Loading />;
+  }
+
+  // Use custom patient list for Patient searches, regular SearchControl for others
+  if (search.resourceType === 'Patient') {
+    return (
+      <CustomPatientList
+        search={search}
+        onNew={() => {
+          navigate(`/${search.resourceType}/new`)?.catch(console.error);
+        }}
+        onChange={(e) => {
+          navigate(`/${search.resourceType}${formatSearchQuery(e.definition)}`)?.catch(console.error);
+        }}
+      />
+    );
   }
 
   return (

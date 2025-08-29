@@ -1,0 +1,185 @@
+.dropdownContainer {
+  position: relative;
+  display: inline-block;
+  overflow: visible !important;
+}
+
+.triggerButton {
+  color: #2D7A32;
+  font-size: 0.875rem;
+  padding: 6px 12px;
+  transition: all 0.2s ease;
+  border: 1px solid #2D7A32;
+  background: white;
+  font-weight: 500;
+}
+
+.triggerButton:hover {
+  background: #2D7A32;
+  color: white;
+  border-color: #2D7A32;
+}
+
+.dropdown {
+  min-width: 350px;
+  max-width: 450px;
+  background: white;
+  border: 2px solid #2D7A32;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.assessmentItem {
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+  cursor: default;
+  min-height: 40px;
+}
+
+.assessmentItem:hover {
+  background-color: #f8f9fa;
+}
+
+.assessmentText {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.assessmentName {
+  color: #212529;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.assessmentCode {
+  color: #868e96;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.removeButton {
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.removeButton:hover {
+  background-color: rgba(250, 82, 82, 0.1);
+}
+
+.removeButton:hover svg {
+  color: #fa5252;
+}
+
+.addButton {
+  background-color: #2D7A32;
+  border: none;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.addButton:hover {
+  background-color: #245a28;
+}
+
+/* Library Modal Styles */
+.libraryModal {
+  .mantine-Modal-header {
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+  }
+
+  .mantine-Modal-title {
+    width: 100%;
+  }
+}
+
+.libraryItem {
+  transition: all 0.2s ease;
+  border-color: #e0e0e0;
+}
+
+.libraryItem:hover {
+  border-color: #2D7A32;
+  box-shadow: 0 2px 8px rgba(45, 122, 50, 0.1);
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dropdown {
+    min-width: 300px;
+    max-width: calc(100vw - 32px);
+    left: auto;
+    right: 0;
+  }
+
+  .assessmentItem {
+    padding: 10px 12px;
+    min-height: 44px; /* Touch-friendly height */
+  }
+
+  .removeButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .assessmentText {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .assessmentCode {
+    font-size: 0.75rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .dropdown {
+    background: #1a1b1e;
+    border-color: #373a40;
+  }
+
+  .assessmentItem:hover {
+    background-color: #25262b;
+  }
+
+  .assessmentName {
+    color: #c1c2c5;
+  }
+
+  .libraryItem {
+    background: #1a1b1e;
+    border-color: #373a40;
+  }
+}

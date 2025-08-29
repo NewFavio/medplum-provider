@@ -34,6 +34,46 @@ export async function onboardPatient(
 ): Promise<Patient> {
   const answers = getQuestionnaireAnswers(response);
 
+  // Check eligibility criteria first
+  const isAge18Plus = answers['age-18-or-older']?.valueCoding?.code === 'yes';
+  const yearOfBirth = answers['year-of-birth']?.valueString;
+  
+  // Check HIV diagnosis criteria
+  const hivDiagnosis12Months = answers['hiv-diagnosis-12-months']?.valueCoding?.code === 'yes';
+  const hivCriteria = [
+    answers['hiv-criteria-1']?.valueBoolean,
+    answers['hiv-criteria-2']?.valueBoolean,
+    answers['hiv-criteria-3']?.valueBoolean,
+    answers['hiv-criteria-4']?.valueBoolean,
+    answers['hiv-criteria-5']?.valueBoolean
+  ].filter(Boolean).length > 0;
+  
+  // Check system assessment
+  const needsServices = answers['needs-services']?.some((answer: any) => 
+    answer.valueCoding?.code === 'mental-health' || answer.valueCoding?.code === 'substance-use'
+  );
+  
+  // Check willingness to receive services
+  const willingToReceive = answers['willing-to-receive']?.some((answer: any) => 
+    answer.valueCoding?.code === 'mental-health' || answer.valueCoding?.code === 'substance-use'
+  );
+
+  if (!isAge18Plus) {
+    throw new Error('Patient does not meet eligibility criteria. Client must be 18+ years old.');
+  }
+  
+  if (!hivDiagnosis12Months && !hivCriteria) {
+    throw new Error('Patient does not meet HIV diagnosis criteria for project eligibility.');
+  }
+  
+  if (!needsServices) {
+    throw new Error('Patient does not need mental health or substance use services and is not eligible to participate in the project.');
+  }
+  
+  if (!willingToReceive) {
+    throw new Error('Patient is not willing to receive mental health or substance use services and is not eligible to participate in the project.');
+  }
+
   let patient: Patient = {
     resourceType: 'Patient',
   };

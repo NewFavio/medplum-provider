@@ -6,3 +6,76 @@
 .rbc-btn-group button {
   font-size: 14px;
 }
+
+/* Custom light blue navigation styling */
+.medplum-app-shell-header {
+  background-color: #e3f2fd !important;
+  border-bottom: 2px solid #bbdefb !important;
+}
+
+.medplum-app-shell-header .medplum-logo {
+  color: #1976d2 !important;
+}
+
+.medplum-app-shell-header .medplum-menu-button {
+  color: #1976d2 !important;
+}
+
+.medplum-app-shell-header .medplum-menu-button:hover {
+  background-color: #bbdefb !important;
+}
+
+.medplum-app-shell-header .medplum-notification-icon {
+  color: #1976d2 !important;
+}
+
+.medplum-app-shell-header .medplum-notification-icon:hover {
+  background-color: #bbdefb !important;
+}
+
+/* Sidebar navigation styling */
+.medplum-app-shell-navbar {
+  background-color: #e3f2fd !important;
+  border-right: 2px solid #bbdefb !important;
+}
+
+.medplum-app-shell-navbar .medplum-menu-title {
+  color: #1976d2 !important;
+  font-weight: 600 !important;
+  background-color: #bbdefb !important;
+  border-bottom: 1px solid #90caf9 !important;
+  font-size: 16px !important; /* Increased by 2pts from default 14px */
+}
+
+.medplum-app-shell-navbar .medplum-menu-link {
+  color: #1976d2 !important;
+  background-color: #f3f8ff !important;
+  font-size: 16px !important; /* Increased by 2pts from default 14px */
+}
+
+.medplum-app-shell-navbar .medplum-menu-link:hover {
+  background-color: #bbdefb !important;
+}
+
+.medplum-app-shell-navbar .medplum-menu-link.active {
+  background-color: #1976d2 !important;
+  color: white !important;
+}
+
+.medplum-app-shell-navbar .medplum-menu-link.active:hover {
+  background-color: #1565c0 !important;
+}
+
+/* Additional styling for better visual hierarchy */
+.medplum-app-shell-navbar .medplum-menu-section {
+  background-color: #e3f2fd !important;
+  margin-bottom: 8px !important;
+  border-radius: 4px !important;
+}
+
+.medplum-app-shell-navbar .medplum-menu-group {
+  background-color: #f3f8ff !important;
+  border-left: 3px solid #bbdefb !important;
+  margin-left: 8px !important;
+  padding-left: 12px !important;
+}

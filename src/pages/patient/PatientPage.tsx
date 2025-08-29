@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
 // SPDX-License-Identifier: Apache-2.0
-import { Loader, Modal, ScrollArea } from '@mantine/core';
+import { Loader, Modal, ScrollArea, Button, Group } from '@mantine/core';
 import { getReferenceString, isOk } from '@medplum/core';
 import { OperationOutcome } from '@medplum/fhirtypes';
 import { Document, OperationOutcomeAlert, PatientSummary } from '@medplum/react';
@@ -11,6 +11,7 @@ import classes from './PatientPage.module.css';
 import { PatientPageTabInfo, PatientPageTabs, formatPatientPageTabUrl } from './PatientPage.utils';
 import { PatientTabsNavigation } from './PatientTabsNavigation';
 import { OrderLabsPage } from '../OrderLabsPage';
+import { AssessmentsDropdown } from '../../components/AssessmentsDropdown';
 
 function getTabFromLocation(location: Location): PatientPageTabInfo | undefined {
   const tabId = location.pathname.split('/')[3] ?? '';
@@ -84,6 +85,14 @@ export function PatientPage(): JSX.Element {
       <div key={getReferenceString(patient)} className={classes.container}>
         <div className={classes.sidebar}>
           <ScrollArea className={classes.scrollArea}>
+            <div style={{ padding: '16px', borderBottom: '1px solid #e9ecef' }}>
+              <Group>
+                <AssessmentsDropdown 
+                  size="sm"
+                  variant="light"
+                />
+              </Group>
+            </div>
             <PatientSummary
               patient={patient}
               onClickResource={(resource) =>

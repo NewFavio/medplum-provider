@@ -46,524 +46,324 @@ export function IntakeFormPage(): JSX.Element {
 const questionnaire: Questionnaire = {
   resourceType: 'Questionnaire',
   status: 'active',
-  title: 'Patient Intake Questionnaire',
-  url: 'https://medplum.com/Questionnaire/patient-intake-questionnaire-example',
-  name: 'patient-intake',
+  title: 'Client Eligibility Screening',
+  url: 'https://medplum.com/Questionnaire/client-eligibility-screening',
+  name: 'client-eligibility-screening',
   item: [
     {
-      linkId: 'patient-demographics',
-      text: 'Demographics',
+      linkId: 'hiv-diagnosis-info',
+      text: '1. HIV Diagnosis Information',
       type: 'group',
       item: [
         {
-          linkId: 'first-name',
-          text: 'First Name',
-          type: 'string',
+          linkId: 'hiv-diagnosis-12-months',
+          text: 'a. Was the client diagnosed with HIV in the past 12 months?',
+          type: 'choice',
           required: true,
+          answerOption: [
+            { valueCoding: { code: 'yes', display: 'Yes' } },
+            { valueCoding: { code: 'no', display: 'No' } }
+          ]
         },
         {
-          linkId: 'middle-name',
-          text: 'Middle Name',
-          type: 'string',
-        },
-        {
-          linkId: 'last-name',
-          text: 'Last Name',
-          type: 'string',
-          required: true,
-        },
-        {
-          linkId: 'dob',
-          text: 'Date of Birth',
-          type: 'date',
-        },
-        {
-          linkId: 'street',
-          text: 'Street',
-          type: 'string',
-        },
-        {
-          linkId: 'city',
-          text: 'City',
-          type: 'string',
-        },
-        {
-          linkId: 'state',
-          text: 'State',
-          type: 'choice',
-          answerValueSet: 'http://hl7.org/fhir/us/core/ValueSet/us-core-usps-state',
-        },
-        {
-          linkId: 'zip',
-          text: 'Zip',
-          type: 'string',
-        },
-        {
-          linkId: 'phone',
-          text: 'Phone',
-          type: 'string',
-        },
-        {
-          linkId: 'ssn',
-          text: 'Social Security Number',
-          type: 'string',
-          required: true,
-        },
-        {
-          linkId: 'race',
-          text: 'Race',
-          type: 'choice',
-          answerValueSet: 'http://hl7.org/fhir/us/core/ValueSet/omb-race-category',
-        },
-        {
-          linkId: 'ethnicity',
-          text: 'Ethnicity',
-          type: 'choice',
-          answerValueSet: 'http://hl7.org/fhir/us/core/ValueSet/omb-ethnicity-category',
-        },
-        {
-          linkId: 'gender-identity',
-          text: 'Gender Identity',
-          type: 'choice',
-          answerValueSet: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1021.32',
-          required: true,
-        },
-        {
-          linkId: 'sexual-orientation',
-          text: 'Sexual Orientation',
-          type: 'choice',
-          answerValueSet: 'http://hl7.org/fhir/us/core/ValueSet/us-core-sexual-orientation',
-        },
-      ],
-    },
-    {
-      linkId: 'emergency-contact',
-      text: 'Emergency Contact',
-      type: 'group',
-      repeats: true,
-      item: [
-        {
-          linkId: 'emergency-contact-first-name',
-          text: 'First Name',
-          type: 'string',
-        },
-        {
-          linkId: 'emergency-contact-middle-name',
-          text: 'Middle Name',
-          type: 'string',
-        },
-        {
-          linkId: 'emergency-contact-last-name',
-          text: 'Last Name',
-          type: 'string',
-        },
-        {
-          linkId: 'emergency-contact-phone',
-          text: 'Phone',
-          type: 'string',
-        },
-      ],
-    },
-    {
-      linkId: 'allergies',
-      text: 'Allergies',
-      type: 'group',
-      repeats: true,
-      item: [
-        {
-          linkId: 'allergy-substance',
-          text: 'Substance',
-          type: 'choice',
-          answerValueSet: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1186.8',
-        },
-        {
-          linkId: 'allergy-reaction',
-          text: 'Reaction',
-          type: 'string',
-        },
-        {
-          linkId: 'allergy-onset',
-          text: 'Onset',
-          type: 'dateTime',
-        },
-      ],
-    },
-    {
-      linkId: 'medications',
-      text: 'Current medications',
-      type: 'group',
-      repeats: true,
-      item: [
-        {
-          linkId: 'medication-code',
-          text: 'Medication Name',
-          type: 'choice',
-          answerValueSet: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1010.4',
-        },
-        {
-          linkId: 'medication-note',
-          text: 'Note',
-          type: 'string',
-        },
-      ],
-    },
-    {
-      linkId: 'medical-history',
-      text: 'Medical History',
-      type: 'group',
-      repeats: true,
-      item: [
-        {
-          linkId: 'medical-history-problem',
-          text: 'Problem',
-          type: 'choice',
-          answerValueSet: 'http://hl7.org/fhir/us/core/ValueSet/us-core-condition-code',
-        },
-        {
-          linkId: 'medical-history-clinical-status',
-          text: 'Status',
-          type: 'choice',
-          answerValueSet: 'http://hl7.org/fhir/ValueSet/condition-clinical',
-        },
-        {
-          linkId: 'medical-history-onset',
-          text: 'Onset',
-          type: 'dateTime',
-        },
-      ],
-    },
-    {
-      linkId: 'family-member-history',
-      text: 'Family Member History',
-      type: 'group',
-      repeats: true,
-      item: [
-        {
-          linkId: 'family-member-history-problem',
-          text: 'Problem',
-          type: 'choice',
-          answerValueSet: 'http://hl7.org/fhir/us/core/ValueSet/us-core-condition-code',
-        },
-        {
-          linkId: 'family-member-history-relationship',
-          text: 'Relationship',
-          type: 'choice',
-          answerValueSet: 'http://terminology.hl7.org/ValueSet/v3-FamilyMember',
-        },
-        {
-          linkId: 'family-member-history-deceased',
-          text: 'Deceased',
-          type: 'boolean',
-        },
-      ],
-    },
-    {
-      linkId: 'vaccination-history',
-      text: 'Vaccination History',
-      type: 'group',
-      repeats: true,
-      item: [
-        {
-          linkId: 'immunization-vaccine',
-          text: 'Vaccine',
-          type: 'choice',
-          answerValueSet: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1010.6',
-        },
-        {
-          linkId: 'immunization-date',
-          text: 'Administration Date',
-          type: 'dateTime',
-        },
-      ],
-    },
-    {
-      linkId: 'preferred-pharmacy',
-      text: 'Preferred Pharmacy',
-      type: 'group',
-      item: [
-        {
-          linkId: 'preferred-pharmacy-reference',
-          text: 'Pharmacy',
-          type: 'reference',
-          extension: [
-            {
-              id: 'reference-pharmacy',
-              url: 'http://hl7.org/fhir/StructureDefinition/questionnaire-referenceResource',
-              valueCodeableConcept: {
-                coding: [
-                  {
-                    system: 'http://hl7.org/fhir/fhir-types',
-                    display: 'Organizations',
-                    code: 'Organization',
-                  },
-                ],
-              },
-            },
-          ],
-        },
-      ],
-    },
-    {
-      linkId: 'coverage-information',
-      text: 'Coverage Information',
-      type: 'group',
-      repeats: true,
-      item: [
-        {
-          linkId: 'insurance-provider',
-          text: 'Insurance Provider',
-          type: 'reference',
-          required: true,
-          extension: [
-            {
-              id: 'reference-insurance',
-              url: 'http://hl7.org/fhir/StructureDefinition/questionnaire-referenceResource',
-              valueCodeableConcept: {
-                coding: [
-                  {
-                    system: 'http://hl7.org/fhir/fhir-types',
-                    display: 'Organizations',
-                    code: 'Organization',
-                  },
-                ],
-              },
-            },
-          ],
-        },
-        {
-          linkId: 'subscriber-id',
-          text: 'Subscriber ID',
-          type: 'string',
-          required: true,
-        },
-        {
-          linkId: 'relationship-to-subscriber',
-          text: 'Relationship to Subscriber',
-          type: 'choice',
-          answerValueSet: 'http://hl7.org/fhir/ValueSet/subscriber-relationship',
-          required: true,
-        },
-        {
-          linkId: 'related-person',
-          text: 'Subscriber Information',
+          linkId: 'hiv-previous-diagnosis',
+          text: 'b. Does the client have a previous diagnosis of HIV (more than six months ago) and meet any of the following criteria:',
           type: 'group',
-          enableBehavior: 'all',
-          enableWhen: [
-            {
-              question: 'relationship-to-subscriber',
-              operator: '!=',
-              answerCoding: {
-                system: 'http://terminology.hl7.org/CodeSystem/subscriber-relationship',
-                code: 'other',
-                display: 'Other',
-              },
-            },
-            {
-              question: 'relationship-to-subscriber',
-              operator: '!=',
-              answerCoding: {
-                system: 'http://terminology.hl7.org/CodeSystem/subscriber-relationship',
-                code: 'self',
-                display: 'Self',
-              },
-            },
-            {
-              question: 'relationship-to-subscriber',
-              operator: '!=',
-              answerCoding: {
-                system: 'http://terminology.hl7.org/CodeSystem/subscriber-relationship',
-                code: 'injured',
-                display: 'Injured Party',
-              },
-            },
-          ],
           item: [
             {
-              linkId: 'related-person-first-name',
-              text: 'First Name',
-              type: 'string',
+              linkId: 'hiv-criteria-1',
+              text: 'One or more gaps in HIV medical visits lasting six months or more in the past two years or more?',
+              type: 'boolean'
             },
             {
-              linkId: 'related-person-middle-name',
-              text: 'Middle Name',
-              type: 'string',
+              linkId: 'hiv-criteria-2',
+              text: 'Missed their last two medical appointments in the past 12 months',
+              type: 'boolean'
             },
             {
-              linkId: 'related-person-last-name',
-              text: 'Last Name',
-              type: 'string',
+              linkId: 'hiv-criteria-3',
+              text: 'Missed their last medical appointment in the past six months',
+              type: 'boolean'
             },
             {
-              linkId: 'related-person-dob',
-              text: 'Date of Birth',
-              type: 'date',
+              linkId: 'hiv-criteria-4',
+              text: 'Leaving incarceration/re-entering society after incarceration within the past 12 months',
+              type: 'boolean'
             },
             {
-              linkId: 'related-person-gender-identity',
-              text: 'Gender Identity',
-              type: 'choice',
-              answerValueSet: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1021.32',
-            },
-          ],
+              linkId: 'hiv-criteria-5',
+              text: 'Not virally suppressed (viral load ≥200 copies/mL) at the time of enrollment',
+              type: 'boolean'
+            }
+          ]
         },
-      ],
+        {
+          linkId: 'hiv-eligibility-disclaimer',
+          text: 'If client does not meet above criteria, client is not eligible to participate in the project.',
+          type: 'display'
+        }
+      ]
     },
     {
-      linkId: 'social-determinants-of-health',
-      text: 'Social Determinants of Health',
+      linkId: 'age-verification',
+      text: 'Age Verification',
       type: 'group',
       item: [
         {
-          linkId: 'housing-status',
-          text: 'Housing Status',
+          linkId: 'age-18-or-older',
+          text: '2. Is the client 18 years of age or older?',
           type: 'choice',
-          answerValueSet: 'http://terminology.hl7.org/ValueSet/v3-LivingArrangement',
+          required: true,
+          answerOption: [
+            { valueCoding: { code: 'yes', display: 'Yes' } },
+            { valueCoding: { code: 'no', display: 'No' } }
+          ]
         },
         {
-          linkId: 'education-level',
-          text: 'Education Level',
+          linkId: 'age-eligibility-disclaimer',
+          text: 'If the client is not 18 years of age or older, client is not eligible to participate in the project.',
+          type: 'display'
+        },
+        {
+          linkId: 'year-of-birth',
+          text: '3. What is the client\'s year of birth?',
+          type: 'string',
+          required: true
+        }
+      ]
+    },
+    {
+      linkId: 'mental-health',
+      text: 'Mental Health (MHI-5 Assessment)',
+      type: 'group',
+      item: [
+        {
+          linkId: 'mhi5-instructions',
+          text: '5. How often have you experienced the following in the past month? Please use the scale below to indicate your answer.',
+          type: 'display'
+        },
+        {
+          linkId: 'mhi5-nervous',
+          text: 'Felt nervous?',
           type: 'choice',
-          answerValueSet: 'http://terminology.hl7.org/ValueSet/v3-EducationLevel',
+          required: true,
+          answerOption: [
+            { valueCoding: { code: '6', display: 'None of the time (0 days per month)' } },
+            { valueCoding: { code: '5', display: 'A little of the time (1-3 days per month)' } },
+            { valueCoding: { code: '4', display: 'Some of the time (4-7 days per month)' } },
+            { valueCoding: { code: '3', display: 'A good bit of the time (8-14 days per month)' } },
+            { valueCoding: { code: '2', display: 'Most of the time (15-22 days per month)' } },
+            { valueCoding: { code: '1', display: 'All of the time (23-30 days per month)' } }
+          ]
         },
         {
-          linkId: 'smoking-status',
-          text: 'Smoking Status',
+          linkId: 'mhi5-down-in-dumps',
+          text: 'Felt so down in the dumps that nothing could cheer you up?',
           type: 'choice',
-          answerValueSet: 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.11.20.9.38',
+          required: true,
+          answerOption: [
+            { valueCoding: { code: '6', display: 'None of the time (0 days per month)' } },
+            { valueCoding: { code: '5', display: 'A little of the time (1-3 days per month)' } },
+            { valueCoding: { code: '4', display: 'Some of the time (4-7 days per month)' } },
+            { valueCoding: { code: '3', display: 'A good bit of the time (8-14 days per month)' } },
+            { valueCoding: { code: '2', display: 'Most of the time (15-22 days per month)' } },
+            { valueCoding: { code: '1', display: 'All of the time (23-30 days per month)' } }
+          ]
         },
         {
-          linkId: 'veteran-status',
-          text: 'Veteran Status',
-          type: 'boolean',
-        },
-        {
-          linkId: 'pregnancy-status',
-          text: 'Pregnancy Status',
+          linkId: 'mhi5-calm-peaceful',
+          text: 'Felt calm and peaceful?',
           type: 'choice',
-          code: [
-            {
-              code: '82810-3',
-              display: 'Pregnancy status',
-              system: 'http://loinc.org',
-            },
-          ],
-          answerValueSet: 'http://example.com/pregnancy-status',
+          required: true,
+          answerOption: [
+            { valueCoding: { code: '1', display: 'None of the time (0 days per month)' } },
+            { valueCoding: { code: '2', display: 'A little of the time (1-3 days per month)' } },
+            { valueCoding: { code: '3', display: 'Some of the time (4-7 days per month)' } },
+            { valueCoding: { code: '4', display: 'A good bit of the time (8-14 days per month)' } },
+            { valueCoding: { code: '5', display: 'Most of the time (15-22 days per month)' } },
+            { valueCoding: { code: '6', display: 'All of the time (23-30 days per month)' } }
+          ]
         },
         {
-          linkId: 'estimated-delivery-date',
-          text: 'Estimated Delivery Date',
-          type: 'date',
-          code: [
-            {
-              code: '11778-8',
-              display: 'Estimated date of delivery',
-              system: 'http://loinc.org',
-            },
-          ],
+          linkId: 'mhi5-downhearted-blue',
+          text: 'Felt downhearted and blue?',
+          type: 'choice',
+          required: true,
+          answerOption: [
+            { valueCoding: { code: '6', display: 'None of the time (0 days per month)' } },
+            { valueCoding: { code: '5', display: 'A little of the time (1-3 days per month)' } },
+            { valueCoding: { code: '4', display: 'Some of the time (4-7 days per month)' } },
+            { valueCoding: { code: '3', display: 'A good bit of the time (8-14 days per month)' } },
+            { valueCoding: { code: '2', display: 'Most of the time (15-22 days per month)' } },
+            { valueCoding: { code: '1', display: 'All of the time (23-30 days per month)' } }
+          ]
+        },
+        {
+          linkId: 'mhi5-happy-person',
+          text: 'Been a happy person?',
+          type: 'choice',
+          required: true,
+          answerOption: [
+            { valueCoding: { code: '1', display: 'None of the time (0 days per month)' } },
+            { valueCoding: { code: '2', display: 'A little of the time (1-3 days per month)' } },
+            { valueCoding: { code: '3', display: 'Some of the time (4-7 days per month)' } },
+            { valueCoding: { code: '4', display: 'A good bit of the time (8-14 days per month)' } },
+            { valueCoding: { code: '5', display: 'Most of the time (15-22 days per month)' } },
+            { valueCoding: { code: '6', display: 'All of the time (23-30 days per month)' } }
+          ]
+        },
+        {
+          linkId: 'mhi5-scoring-note',
+          text: 'Scoring: Suggest a cut-off point between 69-72 to identify individuals with mental health problems. Further screening is recommended.',
+          type: 'display'
+        }
+      ]
+    },
+    {
+      linkId: 'alcohol-use',
+      text: 'Alcohol Use (ASSIST-Lite)',
+      type: 'group',
+      item: [
+        {
+          linkId: 'alcohol-past-3-months',
+          text: '6. In the past three months, did you have a drink containing alcohol?',
+          type: 'choice',
+          required: true,
+          answerOption: [
+            { valueCoding: { code: 'yes', display: 'Yes' } },
+            { valueCoding: { code: 'no', display: 'No' } }
+          ]
+        },
+        {
+          linkId: 'alcohol-standard-drink-info',
+          text: '7. A standard drink is a measure of alcohol consumption that helps people understand how much pure alcohol they\'re actually drinking. In the U.S., a standard drink contains about 14 grams (0.6 ounces) of pure alcohol: 12 ounces of beer (5% alcohol), 5 ounces of wine (12% alcohol), 1.5 ounces of distilled spirits (40% alcohol, e.g., vodka, rum, whiskey).',
+          type: 'display'
+        },
+        {
+          linkId: 'alcohol-more-than-4-drinks',
+          text: 'On any occasion in the past three months, did you drink more than 4 standard drinks of alcohol?',
+          type: 'choice',
           enableWhen: [
             {
-              question: 'pregnancy-status',
+              question: 'alcohol-past-3-months',
               operator: '=',
-              answerCoding: {
-                system: 'http://snomed.info/sct',
-                code: '77386006',
-                display: 'Pregnancy',
-              },
-            },
+              answerCoding: { code: 'yes' }
+            }
           ],
+          answerOption: [
+            { valueCoding: { code: 'yes', display: 'Yes' } },
+            { valueCoding: { code: 'no', display: 'No' } }
+          ]
         },
-      ],
+        {
+          linkId: 'alcohol-control-stop',
+          text: '8. In the past 3 months, have you tried to control, cut down, or stop drinking alcohol and found that you could not?',
+          type: 'choice',
+          enableWhen: [
+            {
+              question: 'alcohol-past-3-months',
+              operator: '=',
+              answerCoding: { code: 'yes' }
+            }
+          ],
+          answerOption: [
+            { valueCoding: { code: 'yes', display: 'Yes' } },
+            { valueCoding: { code: 'no', display: 'No' } }
+          ]
+        },
+        {
+          linkId: 'alcohol-concern',
+          text: '9. In the past three months, has anyone expressed concern about your drinking?',
+          type: 'choice',
+          enableWhen: [
+            {
+              question: 'alcohol-past-3-months',
+              operator: '=',
+              answerCoding: { code: 'yes' }
+            }
+          ],
+          answerOption: [
+            { valueCoding: { code: 'yes', display: 'Yes' } },
+            { valueCoding: { code: 'no', display: 'No' } }
+          ]
+        },
+        {
+          linkId: 'alcohol-scoring-note',
+          text: 'Scoring for alcohol (count "yes" answers) Risk category: 0-1 = Low, 2 = Moderate, 3-4 = High. Further screening is recommended for moderate and high risk.',
+          type: 'display'
+        }
+      ]
     },
     {
-      linkId: 'languages-spoken',
-      text: 'Languages Spoken',
-      type: 'choice',
-      answerValueSet: 'http://hl7.org/fhir/ValueSet/languages',
-      repeats: true,
-    },
-    {
-      linkId: 'preferred-language',
-      text: 'Preferred Language',
-      type: 'choice',
-      answerValueSet: 'http://hl7.org/fhir/ValueSet/languages',
-    },
-    {
-      linkId: 'consent-for-treatment',
-      text: 'Consent for Treatment',
+      linkId: 'drug-use',
+      text: 'Drug Use (NIDA Single Question Screening)',
       type: 'group',
       item: [
         {
-          linkId: 'consent-for-treatment-signature',
-          text: 'I the undersigned patient (or authorized representative, or parent/guardian), consent to and authorize the performance of any treatments, examinations, medical services, surgical or diagnostic procedures, including lab and radiographic studies, as ordered by this office and it’s healthcare providers.',
-          type: 'boolean',
+          linkId: 'drugs-last-year',
+          text: '10. In the past year, have you used drugs other than those required for medical reasons?',
+          type: 'choice',
+          required: true,
+          answerOption: [
+            { valueCoding: { code: 'yes', display: 'Yes' } },
+            { valueCoding: { code: 'no', display: 'No' } }
+          ]
         },
         {
-          linkId: 'consent-for-treatment-date',
-          text: 'Date',
-          type: 'date',
-        },
-      ],
+          linkId: 'drug-scoring-note',
+          text: 'Scoring: If they answer yes, further screening is recommended.',
+          type: 'display'
+        }
+      ]
     },
     {
-      linkId: 'agreement-to-pay-for-treatment',
-      text: 'Agreement to Pay for Treatment',
+      linkId: 'system-assessment',
+      text: 'System Assessment',
       type: 'group',
       item: [
         {
-          linkId: 'agreement-to-pay-for-treatment-help',
-          text: 'I, the responsible party, hereby agree to pay all the charges submitted by this office during the course of treatment for the patient. If the patient has insurance coverage with a managed care organization, with which this office has a contractual agreement, I agree to pay all applicable co‐payments, co‐insurance and deductibles, which arise during the course of treatment for the patient. The responsible party also agrees to pay for treatment rendered to the patient, which is not considered to be a covered service by my insurer and/or a third party insurer or other payor. I understand that Sample Hospital provides charges on a sliding fee; based on family size and household annual income, and that services will not be refused due to inability to pay at the time of the visit.',
-          type: 'boolean',
+          linkId: 'needs-services',
+          text: '11. (To be completed by system staff) Is the client in need of mental health or substance use services? (Select all that apply.)',
+          type: 'choice',
+          repeats: true,
+          required: true,
+          answerOption: [
+            { valueCoding: { code: 'mental-health', display: 'Yes, the client needs mental health services (based on system\'s assessment)' } },
+            { valueCoding: { code: 'substance-use', display: 'Yes, the client needs substance use services (based on system\'s assessment)' } },
+            { valueCoding: { code: 'no-need', display: 'No, the client does not need mental health or substance use services' } }
+          ]
         },
         {
-          linkId: 'agreement-to-pay-for-treatment-date',
-          text: 'Date',
-          type: 'date',
-        },
-      ],
+          linkId: 'system-assessment-disclaimer',
+          text: 'If the client does not need mental health and/or substance use services, the client is not eligible to participate in the project.',
+          type: 'display'
+        }
+      ]
     },
     {
-      linkId: 'notice-of-privacy-practices',
-      text: 'Notice of Privacy Practices',
+      linkId: 'willingness-to-receive',
+      text: 'Willingness to Receive Services',
       type: 'group',
       item: [
         {
-          linkId: 'notice-of-privacy-practices-help',
-          text: 'Sample Hospital Notice of Privacy Practices gives information about how Sample Hospital may use and release protected health information (PHI) about you. I understand that:\n- I have the right to receive a copy of Sample Hospital’s Notice of Privacy Practices.\n- I may request a copy at any time.\n- Sample Hospital‘s Notice of Privacy Practices may be revised.',
-          type: 'display',
+          linkId: 'willing-to-receive',
+          text: '12. Are you willing to receive mental health or substance use services for this project? (Select all that apply.)',
+          type: 'choice',
+          repeats: true,
+          required: true,
+          answerOption: [
+            { valueCoding: { code: 'mental-health', display: 'Yes, the client is willing to receive mental health services' } },
+            { valueCoding: { code: 'substance-use', display: 'Yes, the client is willing to receive substance use services' } },
+            { valueCoding: { code: 'not-willing', display: 'No, the client is not willing to receive mental health or substance use services' } }
+          ]
         },
         {
-          linkId: 'notice-of-privacy-practices-signature',
-          text: 'I acknowledge the above and that I have received a copy of Sample Hospital’s Notice of Privacy Practices.',
-          type: 'boolean',
-        },
-        {
-          linkId: 'notice-of-privacy-practices-date',
-          text: 'Date',
-          type: 'date',
-        },
-      ],
-    },
-    {
-      linkId: 'acknowledgement-for-advance-directives',
-      text: 'Acknowledgement for Advance Directives',
-      type: 'group',
-      item: [
-        {
-          linkId: 'acknowledgement-for-advance-directives-help',
-          text: 'An Advance Medical Directive is a document by which a person makes provision for health care decisions in the event that, in the future, he/she becomes unable to make those decisions.',
-          type: 'display',
-        },
-        {
-          linkId: 'acknowledgement-for-advance-directives-signature',
-          text: 'I acknowledge I have received information about Advance Directives.',
-          type: 'boolean',
-        },
-        {
-          linkId: 'acknowledgement-for-advance-directives-date',
-          text: 'Date',
-          type: 'date',
-        },
-      ],
-    },
-  ],
+          linkId: 'willingness-disclaimer',
+          text: 'If the client is not willing to receive mental health or substance use services, the client is not eligible to participate in the project.',
+          type: 'display'
+        }
+      ]
+    }
+  ]
 };
+
